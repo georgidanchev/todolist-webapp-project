@@ -2,25 +2,25 @@ var htmlString = "";
 var htmlBody = document.querySelector('.wrapper');
 
 var todoListArray = [{
-    tName: 'cook some food',
-    dateOfCom: '01/05/18',
-    tPriority: 1
-  },{
-    tName: 'Take out the trash',
-    dateOfCom: '03/05/18',
-    tPriority: 2
-  }];
+  tName: 'Cook some food',
+  dateOfCom: '01/05/18',
+  tPriority: 1
+}, {
+  tName: 'Take out the trash',
+  dateOfCom: '03/05/18',
+  tPriority: 2
+}];
 
-function printSpecific(i) {
-htmlString += '<li>' + 'Task Name: ' + todoListArray[i].tName + ' Priority: ' +
-todoListArray[i].tPriority + ' DOC: '+ todoListArray[i].dateOfCom;
+function specificPrint(i) {
+  htmlString += '<li>' + 'Task Name:   ' + todoListArray[i].tName + '   Priority:   ' +
+    todoListArray[i].tPriority + '   DOC:   ' + todoListArray[i].dateOfCom;
 }
 
-function printToWeb() {
+function webPrint() {
   htmlString = '<ol>';
 
   for (var i = 0; i < todoListArray.length; i++) {
-    printSpecific(i);
+    specificPrint(i);
   }
 
   htmlString += '</ol>';
@@ -38,7 +38,7 @@ function webOverwrite(message) {
   */
 }
 
-function addToWeb(message) {
+function webAdd(message) {
   var div = document.getElementById('todoHTML');
 
   div.innerHTML += message;
@@ -47,12 +47,12 @@ function addToWeb(message) {
 htmlBody.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
     if (event.target.id == "showStuff") {
-      printToWeb();
+
     }
   }
 });
-//
-// if( true){
-//
-//   printButton
-// }
+
+// run this code only when script first loads.
+window.onload = function() {
+  webPrint();
+};
