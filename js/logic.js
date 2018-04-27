@@ -1,6 +1,6 @@
 var htmlString = "";
 var htmlWrapper = document.querySelector('.wrapper');
-var inputSearchBox = document.querySelector('#searchBox');
+var inputSearchBox = document.querySelector('.searchBox');
 
 var todoListArray = [{
   tName: 'Cook some food',
@@ -14,7 +14,7 @@ var todoListArray = [{
 
 // run this code only when script first loads.
 window.onload = function() {
-  webPrint(); 
+  webPrint();
 };
 
 function specificPrint(i) {

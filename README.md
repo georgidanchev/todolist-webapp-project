@@ -10,9 +10,3 @@ Git address: https://github.com/f54vnfg/TodoList-Website-Project.git
 *Improve HTML style with CSS.
 *Modify layout for a mobile first design.
 *Scale layout for other devices.
-
---- Completed Tasks ---
-*
-
-- Bad Ideas -
-*
