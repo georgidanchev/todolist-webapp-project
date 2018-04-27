@@ -1,5 +1,5 @@
 var htmlString = "";
-var htmlWrapper = document.querySelector('.wrapper');
+var htmlWrapper = document.querySelector('body');
 var inputSearchBox = document.querySelector('.searchBox');
 
 var todoListArray = [{
@@ -52,7 +52,7 @@ function webAdd(message) {
 
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
-    if (event.target.id == "showStuff") {
+    if (event.target.id == "searchBtn") {
 
     }
   }
