@@ -1,5 +1,6 @@
 var htmlString = "";
-var htmlBody = document.querySelector('.wrapper');
+var htmlWrapper = document.querySelector('.wrapper');
+var inputSearchBox = document.querySelector('#searchBox');
 
 var todoListArray = [{
   tName: 'Cook some food',
@@ -10,6 +11,11 @@ var todoListArray = [{
   dateOfCom: '03/05/18',
   tPriority: 2
 }];
+
+// run this code only when script first loads.
+window.onload = function() {
+  webPrint(); 
+};
 
 function specificPrint(i) {
   htmlString += '<li>' + 'Task Name:   ' + todoListArray[i].tName + '   Priority:   ' +
@@ -44,15 +50,10 @@ function webAdd(message) {
   div.innerHTML += message;
 }
 
-htmlBody.addEventListener('click', (event) => {
+htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
     if (event.target.id == "showStuff") {
 
     }
   }
 });
-
-// run this code only when script first loads.
-window.onload = function() {
-  webPrint();
-};
