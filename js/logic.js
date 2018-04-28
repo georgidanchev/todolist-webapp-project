@@ -4,12 +4,22 @@ var inputSearchBox = document.querySelector('.searchBox');
 
 var todoListArray = [{
   tName: 'Cook some food',
-  dateOfCom: '01/05/18',
+  dateOfCom: '03/05/18',
   tPriority: 1
 }, {
   tName: 'Take out the trash',
   dateOfCom: '03/05/18',
   tPriority: 2
+},
+{
+  tName: 'Go out for a jog',
+  dateOfCom: '03/05/18',
+  tPriority: 1
+},
+{
+  tName: 'Clean the house',
+  dateOfCom: '03/05/18',
+  tPriority: 1
 }];
 
 // run this code only when script first loads.
@@ -19,7 +29,7 @@ window.onload = function() {
 
 function webPrint() {
   htmlString = '';
-  htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Date</th></tr></thead><tbody>';
+  htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Completion Date</th></tr></thead><tbody>';
   for (var a = 0; a < todoListArray.length; a++) {
     htmlString += '<tr>';
     specificPrint(a);
