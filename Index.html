@@ -15,11 +15,14 @@
       <p>Quickly organize your day!</p>
     </div>
     <input type="text" class="searchBox" placeholder="Search"> </input>
-    <button type="button" id="searchBtn">Add Item</button>
+    <button type="button" id="addBtn">Add</button>
   </header>
   <hr>
   <main>
-    <section id="todoHTML"></section>
+    <table>
+      <caption>Today's Todo List</caption>
+      <tbody id="todoHTML"></tbody>
+    </table>
   </main>
   <script src="js/logic.js"></script>
   <footer>

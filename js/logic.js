@@ -17,43 +17,25 @@ window.onload = function() {
   webPrint();
 };
 
-function specificPrint(i) {
-  htmlString += '<li>' + 'Task Name:   ' + todoListArray[i].tName + '   Priority:   ' +
-    todoListArray[i].tPriority + '   DOC:   ' + todoListArray[i].dateOfCom;
-}
-
 function webPrint() {
-  htmlString = '<ol>';
-
-  for (var i = 0; i < todoListArray.length; i++) {
-    specificPrint(i);
+  htmlString = '';
+  htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Date</th></tr></thead><tbody>';
+  for (var a = 0; a < todoListArray.length; a++) {
+    htmlString += '<tr>';
+    specificPrint(a);
+    htmlString += '</tr>';
   }
-
-  htmlString += '</ol>';
-  webOverwrite(htmlString);
+  htmlString += '</tbody>';
+  document.querySelector('#todoHTML').innerHTML = htmlString;
+  console.log(htmlString);
 }
 
-function webOverwrite(message) {
-  var div = document.getElementById('todoHTML');
-
-  // innerHTML removes the contents and replaces them with new stuff which is compounded.
-  div.innerHTML = '<ol>' + message + '</ol>';
-
-  /* Put below code in index.HTML to make this function work.
-  <div id="message"> </div>
-  */
-}
-
-function webAdd(message) {
-  var div = document.getElementById('todoHTML');
-
-  div.innerHTML += message;
+function specificPrint(i) {
+  htmlString += '<td>' + todoListArray[i].tName + '</td><td>' + todoListArray[i].tPriority + '</td><td>' + todoListArray[i].dateOfCom + '</td>';
 }
 
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
-    if (event.target.id == "searchBtn") {
-
-    }
+    if (event.target.id == "addBtn") {}
   }
 });
