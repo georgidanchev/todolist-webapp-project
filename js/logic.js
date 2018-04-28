@@ -21,7 +21,7 @@ var todoListArray = [{
   {
     tName: 'Clean the house',
     dateOfCom: '03/05/18',
-    tPriority: 1
+    tPriority: 2
   }
 ];
 
@@ -33,17 +33,36 @@ window.onload = function() {
 
 function addTableButtons() {
   controlButtonsVar = document.querySelectorAll('.controlButtons');
+  var length = controlButtonsVar.length;
 
-  for (let j = 0; j < controlButtonsVar.length; j++) {
-    let up = document.createElement('button');
-    up.className = 'up';
-    up.textContent = "up";
-    controlButtonsVar[j].appendChild(up);
+  for (let a = 0; a < length; a++) {
+      controlButtonsVar[a].innerHTML = "";
+  }
 
-    let down = document.createElement('button');
-    down.className = 'dn';
-    down.textContent = "dn";
-    controlButtonsVar[j].appendChild(down);
+  for (let j = 0; j < length; j++) {
+    if (j != 0) {
+      let up = document.createElement('button');
+      up.className = 'up';
+      up.textContent = 'up';
+      controlButtonsVar[j].appendChild(up);
+    } else {
+      let up = document.createElement('button');
+      up.style.visibility = 'hidden';
+      up.textContent = 'up';
+      controlButtonsVar[j].appendChild(up);
+    }
+
+    if (j != length - 1) {
+      let down = document.createElement('button');
+      down.className = 'dn';
+      down.textContent = "dn";
+      controlButtonsVar[j].appendChild(down);
+    } else {
+      let down = document.createElement('button');
+      down.style.visibility = 'hidden';
+      down.textContent = "dn";
+      controlButtonsVar[j].appendChild(down);
+    }
 
     let remove = document.createElement('button');
     remove.className = 'remove';
@@ -69,9 +88,37 @@ function webPrint() {
   addTableButtons();
 }
 
+function msg(str) {
+  console.log(str);
+}
+
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
-    if (event.target.id == "addBtn") {}
+    if (event.target.className == 'remove') {
+      let btn = event.target.parentNode;
+      let td = btn.parentNode;
+      let tr = td.parentNode;
+      tr.removeChild(td);
+    }
+    if (event.target.className == 'up') {
+      let btn = event.target.parentNode;
+      let tr = btn.parentNode;
+      let prevTr = tr.previousElementSibling;
+      let tbody = tr.parentNode;
+      tbody.insertBefore(tr, prevTr);
+    }
+    if (event.target.className == 'dn') {
+      let btn = event.target.parentNode;
+      let tr = btn.parentNode;
+      let nextTr = tr.nextElementSibling;
+      let tbody = tr.parentNode;
+      tbody.insertBefore(nextTr, tr);
+    }
+    if (event.target.id == "addBtn") {
+
+
+    }
+    addTableButtons();
   }
 });
 
