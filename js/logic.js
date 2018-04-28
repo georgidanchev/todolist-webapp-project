@@ -31,7 +31,7 @@ function webPrint() {
 }
 
 function specificPrint(i) {
-  htmlString += '<td>' + todoListArray[i].tName + '</td><td>' + todoListArray[i].tPriority + '</td><td>' + todoListArray[i].dateOfCom + '</td>';
+  htmlString += '<th scope="row">' + todoListArray[i].tName + '</th><td>' + todoListArray[i].tPriority + '</td><td>' + todoListArray[i].dateOfCom + '</td>';
 }
 
 htmlWrapper.addEventListener('click', (event) => {

@@ -17,7 +17,7 @@ main {
 }
 
 h1 h2 h3 {
-  color: #637a91;
+  /* color: #637a91; */
   font-weight: 600;
 }
 
@@ -80,7 +80,7 @@ header {
 /* Table styling pasted */
 
 table {
-  /* max-width: 960px; */
+  width: 95%;
   margin: 10px auto;
 }
 
