@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>ToDoEr: Basic Todo List</title>
-  <link rel="stylesheet" href="css/normalize.css">
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -14,8 +14,11 @@
       <h1>ToDoEr</h1>
       <p>Quickly organize your day!</p>
     </div>
-    <input type="text" id="searchBox" placeholder="Search"> </input>
-    <button type="button" id="addBtn">Add</button>
+    <input type="text" id="inputBox" placeholder="Search"> </input>
+    <div>
+      <button type="button" id="addBtn">Add</button>
+      <button type="button" id="srchBtn">Srch</button>
+    </div>
   </header>
   <hr>
   <main>
@@ -29,6 +32,6 @@
     <p><small>&copy;2018 ToDoEr, The Life Organzer</small></p>
   </footer>
 </body>
-<script src="js/logic.js"></script>
+<script src="logic.js"></script>
 
 </html>

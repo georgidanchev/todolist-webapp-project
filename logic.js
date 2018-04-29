@@ -1,6 +1,6 @@
+var htmlWrapper = document.querySelector('body'),
+inputBox = document.querySelector('#inputBox');
 var htmlString = "";
-var htmlWrapper = document.querySelector('body');
-var inputSearchBox = document.querySelector('#searchBox');
 var controlButtonsVar;
 var hasSearched = false;
 
@@ -25,6 +25,11 @@ var todoListArray = [{
   }
 ];
 
+// debuing function
+function msg(str) {
+  console.log(str);
+}
+
 // run this code only when script first loads.
 window.onload = function() {
   webPrint();
@@ -36,11 +41,11 @@ function addTableButtons() {
   var length = controlButtonsVar.length;
 
   for (let a = 0; a < length; a++) {
-      controlButtonsVar[a].innerHTML = "";
+    controlButtonsVar[a].innerHTML = "";
   }
 
   for (let j = 0; j < length; j++) {
-    if (j != 0) {
+    if (j != 0 && j > 0) {
       let up = document.createElement('button');
       up.className = 'up';
       up.textContent = 'up';
@@ -88,10 +93,6 @@ function webPrint() {
   addTableButtons();
 }
 
-function msg(str) {
-  console.log(str);
-}
-
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
     if (event.target.className == 'remove') {
@@ -114,7 +115,10 @@ htmlWrapper.addEventListener('click', (event) => {
       let tbody = tr.parentNode;
       tbody.insertBefore(nextTr, tr);
     }
-    if (event.target.id == "addBtn") {
+    if (event.target.id == "addBtn" && inputBox.value != 0) {
+      createNewTableRow();
+    }
+    if (event.target.id == "srchBtn") {
 
 
     }
@@ -122,8 +126,31 @@ htmlWrapper.addEventListener('click', (event) => {
   }
 });
 
+function createNewTableRow(input) {
+  var msg1 = 'Please enter task Priority - e.g. (1,2,3).',
+  msg2 = 'Please enter date of completion. i.e dd/mm/yy';
+
+  var tr = document.createElement('tr'),
+    th = document.createElement('th'),
+    td1Pri = document.createElement('td'),
+    td2Dat = document.createElement('td'),
+    td3But = document.createElement('td');
+
+  tr.scope = 'row';
+  td3But.className = 'controlButtons';
+  tr.appendChild(th);
+  tr.appendChild(td1Pri);
+  tr.appendChild(td2Dat);
+  tr.appendChild(td3But);
+
+  th.textContent = inputBox.value;
+  td1Pri.textContent = prompt(msg1);
+  td2Dat.textContent = prompt(msg2);
+  document.querySelectorAll('tbody')[0].appendChild(tr);
+}
+
 while (hasSearched === true) {
-  if (inputSearchBox.text == todoListArray.Name) {
+  if (inputBox.text == todoListArray.Name) {
 
   }
 }
