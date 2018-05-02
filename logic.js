@@ -29,97 +29,93 @@ var todoListArray = [{
   }
 ];
 
-// debuing function
+// Debuing only function.
 function msg(str) {
   console.log(str);
 }
 
-function resetInput() {
-  searchBox.value = "";
-}
-
-function modalVisablity(viz) {
+// Control modal visability.
+function ctrlModalVis(vis) {
   var pageCover = document.querySelector('#pageCover'),
     modalBody = document.querySelector('#modalWrapper');
 
-  if (viz === false) {
-    pageCover.style.display = "none";
-    modalBody.style.display = "none";
-  } else {
+  if (vis == true) {
     pageCover.style.display = "block";
     modalBody.style.display = "flex";
+  } else {
+    pageCover.style.display = "none";
+    modalBody.style.display = "none";
   }
 }
 
-// run this code only when script first loads.
+// Run this code only when script first loads.
 window.onload = function() {
-  webPrint();
+  tablePrint();
 };
 
 function addTableBtns(j) {
   controlButtonsVar = document.querySelectorAll('.controlButtons');
   length = controlButtonsVar.length;
+  let up = document.createElement('button');
 
+  // Loop which empties the button html fields.
   for (let x = 0; x < length; x++) {
     controlButtonsVar[x].innerHTML = "";
   }
 
   for (let j = 0; j < length; j++) {
     if (j !== 0) {
-      addUpButton(j, true);
+      processTableBtn(j,'up',true);
     } else {
-      addUpButton(j, false);
+      //processTableBtn(j,'up',false);
     }
 
     if (j !== length - 1) {
-      addDnButton(j, true);
+      processTableBtn(j,'down',true);
     } else {
-      addDnButton(j, false);
+      //processTableBtn(j,'down',false);
     }
-    addeXbutton(j);
+    processTableBtn(j,'remove',true);
   }
 }
 
-function addUpButton(j, visibility) {
-  let up = document.createElement('button');
-
-  if (visibility == true) {
-    up.textContent = 'up';
-    up.className = 'up';
-  } else {
-    up.className = 'lockedBtn';
-    // up.style.visibility = 'hidden';
+function processTableBtn(j, bName, visibility) {
+  if (bName == 'up') {
+    let up = document.createElement('button');
+    if(visibility == true){
+      up.textContent = 'up';
+      up.className = 'up';
+    } else {
+      up.className = 'lockedBtn';
+      // up.style.visibility = 'hidden';
+    }
+    controlButtonsVar[j].appendChild(up);
+  } else if (bName == 'down') {
+    let down = document.createElement('button');
+    if(visibility == true){
+      down.textContent = "dw";
+      down.className = 'down';
+    } else {
+      down.className = 'lockedBtn';
+      // down.style.visibility = 'hidden';
+    }
+    controlButtonsVar[j].appendChild(down);
+  } else if (bName == 'remove') {
+    let remove = document.createElement('button');
+    if(visibility == true){
+      remove.className = 'remove';
+      remove.textContent = 'x';
+    }
+    controlButtonsVar[j].appendChild(remove);
   }
-  controlButtonsVar[j].appendChild(up);
-}
-
-function addDnButton(j, visibility) {
-  let down = document.createElement('button');
-
-
-  if (visibility == true) {
-    down.textContent = "dw";
-    down.className = 'down';
-  } else {
-    down.className = 'lockedBtn';
-    // down.style.visibility = 'hidden';
-  }
-  controlButtonsVar[j].appendChild(down);
-}
-
-function addeXbutton(j, visibility) {
-  let remove = document.createElement('button');
-  remove.className = 'remove';
-  remove.textContent = 'x';
-  controlButtonsVar[j].appendChild(remove);
 }
 
 function createTableRow(input) {
   var nameInput = document.querySelector('#taskNameInput'),
     prioInput = document.querySelector('#taskPrioInput'),
     dateInput = document.querySelector('#taskDateInput');
-  if (nameInput.value != 0) {
 
+  if (nameInput.value !== 0) {
     var tr = document.createElement('tr'),
       th = document.createElement('th'),
       td1Pri = document.createElement('td'),
@@ -142,28 +138,9 @@ function createTableRow(input) {
     dateInput.value = '';
 
     document.querySelectorAll('tbody')[0].appendChild(tr);
+    ctrlModalVis(false);
     addTableBtns();
-    modalVisablity(false);
   }
-}
-
-
-
-function webPrint() {
-  htmlString = '';
-  htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Completion Date</th><th scope="col">Controls</th></tr></thead><tbody>';
-
-  for (var i = 0; i < todoListArray.length; i++) {
-    htmlString += '<tr><th scope="row" class="tName">' +
-      todoListArray[i].tName + '</th><td>' +
-      todoListArray[i].tPriority + '</td><td>' +
-      todoListArray[i].dateOfCom +
-      '</td><td class = "controlButtons"></td></tr>';
-  }
-
-  htmlString += '</tbody>';
-  document.querySelector('#todoHTML').innerHTML = htmlString;
-  addTableBtns();
 }
 
 function tableBtnRespond(btnClass, eventTarget) {
@@ -183,10 +160,7 @@ function tableBtnRespond(btnClass, eventTarget) {
   addTableBtns();
 }
 
-function findWord(word, str) {
-  return RegExp('\\b' + word + '\\b').test(str);
-}
-
+/* */
 function searchObjArray() {
   hasSearched = false;
   var tableNames = document.querySelectorAll('.tName');
@@ -194,7 +168,7 @@ function searchObjArray() {
     colorChangedNode.style.background = defultNodeColor;
   }
 
-  if (searchBox.value != 0) {
+  if (searchBox.value !== 0) {
     var uSearch = searchBox.value.toLowerCase();
     for (var i = 0; i < tableNames.length; i++) {
       if (tableNames[i].textContent.toLowerCase().match(uSearch)) {
@@ -208,9 +182,15 @@ function searchObjArray() {
       }
     }
   }
-  resetInput();
+  searchBox.value = "";
 }
 
+/* */
+function findWord(word, str) {
+  return RegExp('\\b' + word + '\\b').test(str);
+}
+
+/* */
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
     var bName = event.target.className;
@@ -230,15 +210,32 @@ htmlWrapper.addEventListener('click', (event) => {
     }
 
     if (event.target.id == "addBtn") {
-      modalVisablity(true);
+      ctrlModalVis(true);
     } else if (event.target.id == "closeModal") {
-      modalVisablity(false);
+      ctrlModalVis(false);
     }
   }
 });
-
+/* */
 searchBox.addEventListener("keyup", (event) => {
-  if (event.keyCode === 13) {
+  if (event.keyCode == 13) {
     searchObjArray();
   }
 });
+
+function tablePrint() {
+  htmlString = '';
+  htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Completion Date</th><th scope="col">Controls</th></tr></thead><tbody>';
+
+  for (var i = 0; i < todoListArray.length; i++) {
+    htmlString += '<tr><th scope="row" class="tName">' +
+      todoListArray[i].tName + '</th><td>' +
+      todoListArray[i].tPriority + '</td><td>' +
+      todoListArray[i].dateOfCom +
+      '</td><td class = "controlButtons"></td></tr>';
+  }
+
+  htmlString += '</tbody>';
+  document.querySelector('#todoHTML').innerHTML = htmlString;
+  addTableBtns();
+}
