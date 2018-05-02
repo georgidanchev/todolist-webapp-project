@@ -14,19 +14,46 @@
       <h1>ToDoEr</h1>
       <p>Quickly organize your day!</p>
     </div>
-    <input type="text" id="inputBox" placeholder="Search"> </input>
+    <input type="text" id="searchBox" placeholder="Search" />
     <div>
-      <button type="button" id="addBtn">Add</button>
       <button type="button" id="srchBtn">Srch</button>
+      <button type="button" id="addBtn">Add</button>
     </div>
   </header>
-  <hr>
-  <main>
-    <table>
-      <!-- <caption>Today's Todo List</caption> -->
-      <table id="todoHTML" cellspacing="0" cellpadding="0"></table>
-    </table>
-  </main>
+
+
+
+  <div id="contentWrapper">
+    <main>
+      <table>
+        <!-- <caption>Today's Todo List</caption> -->
+        <table id="todoHTML" cellspacing="0" cellpadding="0"></table>
+      </table>
+    </main>
+
+
+    <div id="pageCover" style="display: none">
+    </div>
+    <div id="modalWrapper" style="display: none">
+
+      <div id="myModal">
+        <button id="closeModal">x</button>
+        <p>Task Details Form</p>
+        <div class="modal-content">
+
+          <p>Review Task Name:</p>
+          <input type="text" id="taskNameInput" placeholder="" />
+          <p>Task Prioiry: </p>
+          <input type="text" id="taskPrioInput" placeholder="" />
+          <p>Date of Completion:</p>
+          <input type="text" id="taskDateInput" placeholder="" />
+
+        </div>
+        <button type="button" id="submitButton">Submit</button>
+      </div>
+    </div>
+
+  </div>
 
   <footer>
     <p><small>&copy;2018 ToDoEr, The Life Organzer</small></p>

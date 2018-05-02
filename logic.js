@@ -1,6 +1,6 @@
 var htmlWrapper = document.querySelector('body'),
-  inputBox = document.querySelector('#inputBox'),
-  searchNodeColor = 'red',
+  searchBox = document.querySelector('#searchBox'),
+  searchNodeColor = "rgba(214,95,92,0.5)",
   colorChangedNode,
   defultNodeColor,
   hasSearched = false,
@@ -35,7 +35,20 @@ function msg(str) {
 }
 
 function resetInput() {
-  inputBox.value = "";
+  searchBox.value = "";
+}
+
+function modalVisablity(viz) {
+  var pageCover = document.querySelector('#pageCover'),
+    modalBody = document.querySelector('#modalWrapper');
+
+  if (viz === false) {
+    pageCover.style.display = "none";
+    modalBody.style.display = "none";
+  } else {
+    pageCover.style.display = "block";
+    modalBody.style.display = "flex";
+  }
 }
 
 // run this code only when script first loads.
@@ -69,24 +82,27 @@ function addTableBtns(j) {
 
 function addUpButton(j, visibility) {
   let up = document.createElement('button');
-  up.textContent = 'up';
 
   if (visibility == true) {
+    up.textContent = 'up';
     up.className = 'up';
   } else {
-    up.style.visibility = 'hidden';
+    up.className = 'lockedBtn';
+    // up.style.visibility = 'hidden';
   }
   controlButtonsVar[j].appendChild(up);
 }
 
 function addDnButton(j, visibility) {
   let down = document.createElement('button');
-  down.textContent = "dwn";
+
 
   if (visibility == true) {
+    down.textContent = "dw";
     down.className = 'down';
   } else {
-    down.style.visibility = 'hidden';
+    down.className = 'lockedBtn';
+    // down.style.visibility = 'hidden';
   }
   controlButtonsVar[j].appendChild(down);
 }
@@ -99,29 +115,39 @@ function addeXbutton(j, visibility) {
 }
 
 function createTableRow(input) {
-  var msg1 = 'Please enter task Priority - e.g. (1,2,3).',
-    msg2 = 'Please enter date of completion. i.e dd/mm/yy';
+  var nameInput = document.querySelector('#taskNameInput'),
+    prioInput = document.querySelector('#taskPrioInput'),
+    dateInput = document.querySelector('#taskDateInput');
+  if (nameInput.value != 0) {
 
-  var tr = document.createElement('tr'),
-    th = document.createElement('th'),
-    td1Pri = document.createElement('td'),
-    td2Dat = document.createElement('td'),
-    td3But = document.createElement('td');
+    var tr = document.createElement('tr'),
+      th = document.createElement('th'),
+      td1Pri = document.createElement('td'),
+      td2Dat = document.createElement('td'),
+      td3But = document.createElement('td');
 
-  tr.scope = 'row';
-  td3But.className = 'controlButtons';
-  tr.appendChild(th);
-  tr.appendChild(td1Pri);
-  tr.appendChild(td2Dat);
-  tr.appendChild(td3But);
+    tr.scope = 'row';
+    td3But.className = 'controlButtons';
+    tr.appendChild(th);
+    tr.appendChild(td1Pri);
+    tr.appendChild(td2Dat);
+    tr.appendChild(td3But);
 
-  th.textContent = inputBox.value;
-  td1Pri.textContent = prompt(msg1);
-  td2Dat.textContent = prompt(msg2);
-  document.querySelectorAll('tbody')[0].appendChild(tr);
-  resetInput();
-  addTableBtns();
+    th.textContent = nameInput.value;
+    td1Pri.textContent = prioInput.value;
+    td2Dat.textContent = dateInput.value;
+
+    nameInput.value = '';
+    prioInput.value = '';
+    dateInput.value = '';
+
+    document.querySelectorAll('tbody')[0].appendChild(tr);
+    addTableBtns();
+    modalVisablity(false);
+  }
 }
+
+
 
 function webPrint() {
   htmlString = '';
@@ -168,8 +194,8 @@ function searchObjArray() {
     colorChangedNode.style.background = defultNodeColor;
   }
 
-  if (inputBox.value != 0) {
-    var uSearch = inputBox.value.toLowerCase();
+  if (searchBox.value != 0) {
+    var uSearch = searchBox.value.toLowerCase();
     for (var i = 0; i < tableNames.length; i++) {
       if (tableNames[i].textContent.toLowerCase().match(uSearch)) {
         if (findWord(uSearch, tableNames[i].textContent.toLowerCase())) {
@@ -188,16 +214,31 @@ function searchObjArray() {
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
     var bName = event.target.className;
+
     if (event.target.parentNode.className == "controlButtons") {
       tableBtnRespond(bName, event);
     }
-    if (inputBox.value != 0 || hasSearched == true) {
-      if (event.target.id == "addBtn") {
-        createTableRow();
-      }
+
+    if (searchBox.value != 0 || hasSearched == true) {
       if (event.target.id == "srchBtn") {
         searchObjArray();
       }
     }
+
+    if (event.target.id == "submitButton") {
+      createTableRow();
+    }
+
+    if (event.target.id == "addBtn") {
+      modalVisablity(true);
+    } else if (event.target.id == "closeModal") {
+      modalVisablity(false);
+    }
+  }
+});
+
+searchBox.addEventListener("keyup", (event) => {
+  if (event.keyCode === 13) {
+    searchObjArray();
   }
 });
