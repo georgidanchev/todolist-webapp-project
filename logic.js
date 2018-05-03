@@ -1,6 +1,6 @@
 var htmlWrapper = document.querySelector('body'),
   searchBox = document.querySelector('#searchBox'),
-  searchNodeColor = "rgba(214,95,92,0.5)",
+  searchResultColor = "rgba(214,95,92,0.5)",
   colorChangedNode,
   defultNodeColor,
   hasSearched = false,
@@ -65,25 +65,25 @@ function addTableBtns(j) {
 
   for (let j = 0; j < length; j++) {
     if (j !== 0) {
-      processTableBtn(j,'up',true);
+      processTableBtn(j, 'up', true);
     } else {
       //processTableBtn(j,'up',false);
     }
 
     if (j !== length - 1) {
-      processTableBtn(j,'down',true);
+      processTableBtn(j, 'down', true);
     } else {
       //processTableBtn(j,'down',false);
     }
-    processTableBtn(j,'remove',true);
+    processTableBtn(j, 'remove', true);
   }
 }
 
 function processTableBtn(j, bName, visibility) {
   if (bName == 'up') {
     let up = document.createElement('button');
-    if(visibility == true){
-      up.textContent = 'up';
+    if (visibility == true) {
+      up.textContent = 'u';
       up.className = 'up';
     } else {
       up.className = 'lockedBtn';
@@ -92,8 +92,8 @@ function processTableBtn(j, bName, visibility) {
     controlButtonsVar[j].appendChild(up);
   } else if (bName == 'down') {
     let down = document.createElement('button');
-    if(visibility == true){
-      down.textContent = "dw";
+    if (visibility == true) {
+      down.textContent = "d";
       down.className = 'down';
     } else {
       down.className = 'lockedBtn';
@@ -102,7 +102,7 @@ function processTableBtn(j, bName, visibility) {
     controlButtonsVar[j].appendChild(down);
   } else if (bName == 'remove') {
     let remove = document.createElement('button');
-    if(visibility == true){
+    if (visibility == true) {
       remove.className = 'remove';
       remove.textContent = 'x';
     }
@@ -162,13 +162,14 @@ function tableBtnRespond(btnClass, eventTarget) {
 
 /* */
 function searchObjArray() {
-  hasSearched = false;
   var tableNames = document.querySelectorAll('.tName');
-  if (colorChangedNode) {
+
+  if (hasSearched == true) {
     colorChangedNode.style.background = defultNodeColor;
+    hasSearched = false;
   }
 
-  if (searchBox.value !== 0) {
+  if (searchBox.value != 0 && hasSearched == false) {
     var uSearch = searchBox.value.toLowerCase();
     for (var i = 0; i < tableNames.length; i++) {
       if (tableNames[i].textContent.toLowerCase().match(uSearch)) {
@@ -176,7 +177,7 @@ function searchObjArray() {
           var targetNode = tableNames[i].parentNode;
           defultNodeColor = targetNode.style.background;
           colorChangedNode = targetNode;
-          colorChangedNode.style.background = searchNodeColor;
+          colorChangedNode.style.background = searchResultColor;
           hasSearched = true;
         }
       }
@@ -199,10 +200,8 @@ htmlWrapper.addEventListener('click', (event) => {
       tableBtnRespond(bName, event);
     }
 
-    if (searchBox.value != 0 || hasSearched == true) {
-      if (event.target.id == "srchBtn") {
-        searchObjArray();
-      }
+    if (event.target.id == "srchBtn") {
+      searchObjArray();
     }
 
     if (event.target.id == "submitButton") {

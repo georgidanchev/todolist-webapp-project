@@ -5,6 +5,7 @@
 }
 
 body {
+  font-family: sans-serif;
   color: #484848;
   max-width: 980px;
   margin: 0 auto;
@@ -29,6 +30,11 @@ header h1 {
   font-size: 2rem;
 }
 
+header p {
+  border-bottom: 3px solid white;
+  padding-bottom: 5px;
+}
+
 header p, header h1 {
   margin: 0;
   text-align: center;
@@ -36,23 +42,56 @@ header p, header h1 {
 
 header {
   background-color: lightgrey;
-  padding: 20px 0;
   display: flex;
 }
 
 header button {
-  padding: 15px;
-  mregin-left: 10px;
-  margin-right: 10px;
+  padding: 1.3rem;
+  mregin-left: 1rem;
+  margin-right: 1rem;
+}
+
+#searchBox, #srchBtn, #addBtn {
+  border-radius: 0.5em;
+  border-width: thin;
+  cursor: pointer;
+}
+
+#srchBtn, #addBtn {
+  background-color: #c5ccd2;
+  /* color: white; */
+}
+
+.controlButtons button {
+  color: white;
+  border: solid 1px;
+  border-color: rgba(0, 0, 0, .1);
+  cursor: pointer;
+  margin: 2px;
+  padding: 2px 7px;
+  border-radius: 0.3rem;
+  font-size: 1rem;
+}
+
+.remove {
+  background: #768da3;
+}
+
+.up {
+  background: #52bab3;
+}
+
+.down {
+  background: #508abc;
 }
 
 table {
   width: 95%;
-  margin: 10px auto;
+  margin: 0.7rem auto;
 }
 
 caption {
-  font-size: 1.6em;
+  font-size: 1.6rem;
   font-weight: 400;
   padding: 10px 0;
 }
@@ -61,6 +100,8 @@ thead th {
   font-weight: 400;
   background: darkgrey;
   color: #FFF;
+  padding: 0.5rem;
+  font-weight: bold;
 }
 
 tr {
@@ -122,23 +163,20 @@ body {
 }
 
 @media only screen and (min-width: 960px) and (orientation: landscape) {
-  #inputBox {
-    width: 50%;
-    /* height: 15%; */
-    padding: 15px 15px;
-    border: 1px solid #7A8694;
+  #searchBox {
+    width: 45%;
+    height: 45px;
+    padding: 25px 15px;
     border-radius: .3em;
   }
   body {
-    border: 4px solid blue;
+    border: 2px solid blue;
     /* blue border for debuging media queries */
   }
   header {
     justify-content: space-between;
     align-items: center;
-    padding-top: 2%;
-    padding-right: 7%;
-    padding-left: 7%;
+    padding: 2% 5% 2% 5%;
   }
 }
 
