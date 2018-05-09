@@ -45,20 +45,14 @@ header {
   display: flex;
 }
 
-header button {
-  padding: 1.3rem;
-  mregin-left: 1rem;
-  margin-right: 1rem;
-}
-
 #searchBox, #srchBtn, #addBtn {
-  border-radius: 0.5em;
+  border-radius: 0.5rem;
   border-width: thin;
   cursor: pointer;
 }
 
 #srchBtn, #addBtn {
-  background-color: #c5ccd2;
+  /* background-color: #c5ccd2; */
   /* color: white; */
 }
 
@@ -162,25 +156,7 @@ body {
   z-index: 777;
 }
 
-@media only screen and (min-width: 960px) and (orientation: landscape) {
-  #searchBox {
-    width: 45%;
-    height: 45px;
-    padding: 25px 15px;
-    border-radius: .3em;
-  }
-  body {
-    border: 2px solid blue;
-    /* blue border for debuging media queries */
-  }
-  header {
-    justify-content: space-between;
-    align-items: center;
-    padding: 2% 5% 2% 5%;
-  }
-}
-
-@media only screen and (max-width: 450px) {
+@media only screen and (max-width: 959px) {
   body {
     max-width: 95%;
     border: 4px solid red;
@@ -192,5 +168,28 @@ body {
   header div {
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  body {
+    border: 2px solid blue;
+  }
+  #searchBox {
+    width: 45%;
+    height: 45px;
+    padding: 25px 15px;
+    border-radius: .3em;
+  }
+  header {
+    justify-content: space-between;
+    align-items: center;
+    padding: 2% 5% 2% 5%;
+  }
+
+  header button {
+    padding: 1.3rem;
+    mregin-left: 1rem;
+    margin-right: 1rem;
   }
 }
