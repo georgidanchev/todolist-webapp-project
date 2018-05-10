@@ -15,7 +15,7 @@ function msg(str) {
   console.log(str);
 }
 
-// Run this code only when script first loads.
+// Run this code only on page load.
 window.onload = function() {
   //localStorage.removeItem('arrayData', todoListArray);
   if (localStorage.getItem('arrayData', todoListArray)) {
@@ -50,11 +50,6 @@ function addExampleData() {
       tName: 'Go out for a jog',
       dateOfCom: '03/05/18',
       tPriority: 1
-    },
-    {
-      tName: 'Clean the house',
-      dateOfCom: '03/05/18',
-      tPriority: 2
     }
   ];
 }
@@ -143,7 +138,7 @@ function createTableRow(input) {
     prioInput = document.querySelector('#taskPrioInput'),
     dateInput = document.querySelector('#taskDateInput');
 
-  if (nameInput.value !== 0) {
+  if (nameInput.value !== 0 && prioInput.value !== 0 && dateInput.value !== 0) {
 
     tableSave(nameInput.value, dateInput.value, prioInput.value);
     tablePrint();

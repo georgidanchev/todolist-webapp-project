@@ -45,18 +45,20 @@ header {
   display: flex;
 }
 
-#searchBox, #srchBtn, #addBtn {
-  border-radius: 0.5rem;
-  border-width: thin;
+#srchBtn, #addBtn {
   cursor: pointer;
 }
 
-#srchBtn, #addBtn {
-  /* background-color: #c5ccd2; */
-  /* color: white; */
+#searchBox {
+  cursor: text;
 }
 
-.controlButtons button {
+#searchBox, #srchBtn, #addBtn, #closeModal, #submitButton, .modal-content input {
+  border-radius: 0.5rem;
+  border-width: thin;
+}
+
+.controlButtons button, #closeModal, #submitButton {
   color: white;
   border: solid 1px;
   border-color: rgba(0, 0, 0, .1);
@@ -67,11 +69,11 @@ header {
   font-size: 1rem;
 }
 
-.remove {
+.remove, #closeModal {
   background: #768da3;
 }
 
-.up {
+.up, #submitButton {
   background: #52bab3;
 }
 
@@ -113,19 +115,6 @@ th, td {
   font-weight: 300;
 }
 
-/* Left-Over Styles
-
-tfoot tr {
-  background: none;
-}
-
-tfoot td {
-  padding: 10px 2px;
-  font-size: 0.8em;
-  font-style: italic;
-  color: #8a97a0;
-} */
-
 body {
   position: relative;
 }
@@ -144,7 +133,30 @@ body {
 #modalWrapper {
   display: flex;
   justify-content: center;
-  /* align-items: center; */
+}
+
+.centerStuff {
+  display: flex;
+  justify-content: center;
+}
+
+.alignRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal-content h3 {
+  text-align: center;
+}
+
+.modal-content p {
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0.3rem;
+}
+
+.modal-content input {
+  margin-bottom: 1rem;
 }
 
 #myModal {
@@ -186,7 +198,6 @@ body {
     align-items: center;
     padding: 2% 5% 2% 5%;
   }
-
   header button {
     padding: 1.3rem;
     mregin-left: 1rem;
