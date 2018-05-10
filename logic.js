@@ -16,7 +16,7 @@ function msg(str) {
 
 /* */
 window.onload = function() {
-  //localStorage.removeItem('arrayData', todoListArray);
+
   if (localStorage.getItem('arrayData', todoListArray)) {
     tableLoad();
     msg('Load Table Data');
@@ -172,19 +172,27 @@ function tableBtnRespond(btnClass, eventTarget) {
 
   if (btnClass == 'remove') {
     tbody.removeChild(tr);
+    todoListArray.splice(tr.rowIndex,1);
   } else if (btnClass == 'up') {
     let prevTr = tr.previousElementSibling;
     tbody.insertBefore(tr, prevTr);
+    arraymove(todoListArray, tr.rowIndex, tr.rowIndex-1);
   } else if (btnClass == 'down') {
     let nextTr = tr.nextElementSibling;
+    arraymove(todoListArray, tr.rowIndex-1, tr.rowIndex);
     tbody.insertBefore(nextTr, tr);
   }
 
-  // FIX SAVEING PROBLEM
-
   addTableBtns();
-  //tableSave();
+  tableSave();
 }
+
+function arraymove(arr, fromIndex, toIndex) {
+    var element = arr[fromIndex];
+    arr.splice(fromIndex, 1);
+    arr.splice(toIndex, 0, element);
+}
+
 
 /* */
 function searchObjArray() {
@@ -238,6 +246,11 @@ htmlWrapper.addEventListener('click', (event) => {
       modalVis(true);
     } else if (event.target.id == "closeModal") {
       modalVis(false);
+    }
+    if(event.target.id == "resetArrayData") {
+      localStorage.removeItem('arrayData', todoListArray);
+      tableLoad();
+      tablePrint();
     }
   }
 });
