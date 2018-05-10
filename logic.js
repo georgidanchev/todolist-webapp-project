@@ -59,6 +59,14 @@ function addExampleData() {
   ];
 }
 
+function tableSave(nameInput, dateInput, prioInput) {
+  todoListArray.push({
+    tName: nameInput,
+    dateOfCom: dateInput,
+    tPriority: prioInput
+  });
+}
+
 // Control modal visability.
 function ctrlModalVis(vis) {
   var pageCover = document.querySelector('#pageCover'),
@@ -136,35 +144,19 @@ function createTableRow(input) {
     dateInput = document.querySelector('#taskDateInput');
 
   if (nameInput.value !== 0) {
-    var tr = document.createElement('tr'),
-      th = document.createElement('th'),
-      td1Pri = document.createElement('td'),
-      td2Dat = document.createElement('td'),
-      td3But = document.createElement('td');
 
-    tr.scope = 'row';
-    td3But.className = 'controlButtons';
-    tr.appendChild(th);
-    tr.appendChild(td1Pri);
-    tr.appendChild(td2Dat);
-    tr.appendChild(td3But);
-
-    th.textContent = nameInput.value;
-    td1Pri.textContent = prioInput.value;
-    td2Dat.textContent = dateInput.value;
-
-    todoListArray.push({tName : nameInput.value, dateOfCom: dateInput.value, tPriority: prioInput.value});
+    tableSave(nameInput.value, dateInput.value, prioInput.value);
+    tablePrint();
 
     nameInput.value = '';
     prioInput.value = '';
     dateInput.value = '';
 
-    document.querySelectorAll('tbody')[0].appendChild(tr);
     ctrlModalVis(false);
-    addTableBtns();
     tableSave();
   }
 }
+
 
 function tableBtnRespond(btnClass, eventTarget) {
   let td = eventTarget.target.parentNode;
