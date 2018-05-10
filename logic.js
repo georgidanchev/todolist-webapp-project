@@ -9,35 +9,37 @@ var htmlWrapper = document.querySelector('body'),
 
 var todoListArray = [];
 
-// Debuing only function.
+/* Debug only function. */
 function msg(str) {
   console.log(str);
 }
 
-/* */
+/* When the page loads. do. this. */
 window.onload = function() {
 
   if (localStorage.getItem('arrayData', todoListArray)) {
     tableLoad();
-    msg('Load Table Data');
+    // msg('Load Table Data');
   } else {
     addExampleData();
     tableSave();
-    msg('Save Table Data');
+    // msg('Save Table Data');
   }
   tablePrint();
 };
 
+/* Retrieve array data and convert back from string format. */
 function tableLoad() {
   var string = localStorage.getItem('arrayData', string);
   todoListArray = JSON.parse(string);
 }
 
+/* Save array data locally, but in a string format. */
 function tableSave() {
   localStorage.setItem('arrayData', JSON.stringify(todoListArray));
 }
 
-/* */
+/* This is used if no data is present in the array. */
 function addExampleData() {
   todoListArray = [{
       tName: 'Cook some food',
@@ -56,7 +58,7 @@ function addExampleData() {
   ];
 }
 
-/* */
+/* This function adds stuff to the table array. */
 function addToTable(nameInput, dateInput, prioInput) {
   todoListArray.push({
     tName: nameInput,
@@ -65,7 +67,7 @@ function addToTable(nameInput, dateInput, prioInput) {
   });
 }
 
-// Control modal visability.
+/* This controls the modal visibility. */
 function modalVis(vis) {
   var pageCover = document.querySelector('#pageCover'),
     modalBody = document.querySelector('#modalWrapper');
@@ -79,13 +81,13 @@ function modalVis(vis) {
   }
 }
 
-/* */
-function addTableBtns(j) {
+/* This function resets and adds all table buttons. */
+function addTableBtns() {
   controlButtonsVar = document.querySelectorAll('.controlButtons');
   length = controlButtonsVar.length;
   let up = document.createElement('button');
 
-  // Loop which empties the button html fields.
+  // A loop which empties all the html control button fields.
   for (let x = 0; x < length; x++) {
     controlButtonsVar[x].innerHTML = "";
   }
@@ -94,51 +96,50 @@ function addTableBtns(j) {
     if (j !== 0) {
       processTableBtn(j, 'up', true);
     } else {
-      //processTableBtn(j,'up',false);
+      processTableBtn(j,'up',false);
     }
 
     if (j !== length - 1) {
       processTableBtn(j, 'down', true);
     } else {
-      //processTableBtn(j,'down',false);
+      processTableBtn(j,'down',false);
     }
     processTableBtn(j, 'remove', true);
   }
 }
 
-/* */
+/* This responds to add button function  to create table buttons. */
 function processTableBtn(j, bName, visibility) {
   if (bName == 'up') {
     let up = document.createElement('button');
+    up.textContent = 'u';
     if (visibility == true) {
-      up.textContent = 'up';
       up.className = 'up';
     } else {
       up.className = 'lockedBtn';
-      // up.style.visibility = 'hidden';
+      up.style.visibility = 'hidden';
     }
     controlButtonsVar[j].appendChild(up);
   } else if (bName == 'down') {
     let down = document.createElement('button');
+    down.textContent = "d";
     if (visibility == true) {
-      down.textContent = "dw";
       down.className = 'down';
     } else {
       down.className = 'lockedBtn';
-      // down.style.visibility = 'hidden';
+      down.style.visibility = 'hidden';
     }
     controlButtonsVar[j].appendChild(down);
   } else if (bName == 'remove') {
     let remove = document.createElement('button');
+    remove.textContent = 'x';
     if (visibility == true) {
       remove.className = 'remove';
-      remove.textContent = 'x';
     }
     controlButtonsVar[j].appendChild(remove);
   }
 }
 
-/* */
 function createTableRow(input) {
   var nameInput = document.querySelector('#taskNameInput'),
     prioInput = document.querySelector('#taskPrioInput'),
@@ -157,6 +158,7 @@ function createTableRow(input) {
   }
 }
 
+/* Fixes default date format for date input modal field. */
 function dateFixer(date){
   var d = date.getDate();
   var m = date.getMonth() + 1; //Month from 0 to 11
@@ -164,7 +166,7 @@ function dateFixer(date){
   return (d <= 9 ? '0' + d : d) + '/' + (m<=9 ? '0' + m : m) + '/' +  y;
 }
 
-/* */
+/* This responds to table control button events. */
 function tableBtnRespond(btnClass, eventTarget) {
   let td = eventTarget.target.parentNode;
   let tr = td.parentNode;
@@ -187,6 +189,7 @@ function tableBtnRespond(btnClass, eventTarget) {
   tableSave();
 }
 
+/* Sub-function which help mirror table rows and the array. */
 function arraymove(arr, fromIndex, toIndex) {
     var element = arr[fromIndex];
     arr.splice(fromIndex, 1);
@@ -194,7 +197,9 @@ function arraymove(arr, fromIndex, toIndex) {
 }
 
 
-/* */
+/* Search function - gets all task names with class .tName
+and looks for matches then passes sub-function to narrow
+down the search. If match is found changes node color. */
 function searchObjArray() {
   var tableNames = document.querySelectorAll('.tName');
 
@@ -219,7 +224,7 @@ function searchObjArray() {
 }
 
 /* Search Sub-Function which looks for a specific
-word to avoid getting mutliple search matches. */
+word to avoid getting multiple search matches. */
 function findWord(word, str) {
   return RegExp('\\b' + word + '\\b').test(str);
 }
@@ -247,15 +252,10 @@ htmlWrapper.addEventListener('click', (event) => {
     } else if (event.target.id == "closeModal") {
       modalVis(false);
     }
-    if(event.target.id == "resetArrayData") {
-      localStorage.removeItem('arrayData', todoListArray);
-      tableLoad();
-      tablePrint();
-    }
   }
 });
 
-/* */
+/* Event listener for the enter key. */
 searchBox.addEventListener("keyup", (event) => {
   if (event.keyCode == 13) {
     searchObjArray();
@@ -263,10 +263,10 @@ searchBox.addEventListener("keyup", (event) => {
 });
 
 /* Build the table by looping thought the array and
-bulding html from string then convert it to html */
+building html from string then convert it to html */
 function tablePrint() {
   htmlString = '';
-  htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Completion Date</th><th scope="col">Controls</th></tr></thead><tbody>';
+  htmlString += '<thead><tr><th scope="col">T.NAME</th><th scope="col">P</th><th scope="col">D.O.C</th><th scope="col">C</th></tr></thead><tbody>';
 
   for (var i = 0; i < todoListArray.length; i++) {
     htmlString += '<tr><th scope="row" class="tName">' +
