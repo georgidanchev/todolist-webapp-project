@@ -1,4 +1,4 @@
-/* ========= Universal Styling START ========= */
+/* ========= Universal Styling STARTS ========= */
 
 *, *:before, *:after {
   -moz-box-sizing: border-box;
@@ -6,8 +6,8 @@
   box-sizing: border-box;
 }
 
-/* ========= Universal Styling END ========= */
-/* ========= Core Styling START ========= */
+/* ========= Universal Styling ENDS ========= */
+/* ========= Core Styling STARTS ========= */
 
 body {
   font-family: sans-serif;
@@ -51,8 +51,8 @@ header {
   display: flex;
 }
 
-/* ========= Core Styling END ========= */
-/* ========= General Styling START ========= */
+/* ========= Core Styling ENDS ========= */
+/* ========= General Styling STARTS ========= */
 
 #searchBox {
   cursor: text;
@@ -100,8 +100,8 @@ header {
   justify-content: flex-end;
 }
 
-/* ========= General Styling END ========= */
-/* ========= Table Styling START ========= */
+/* ========= General Styling ENDS ========= */
+/* ========= Table Styling STARTS ========= */
 
 table {
   width: 95%;
@@ -131,7 +131,7 @@ th, td {
   font-weight: 300;
 }
 
-/* ========= Table Styling END ========= */
+/* ========= Table Styling ENDS ========= */
 /* ========= Modal Styling STARTS ========= */
 
 #pageCover {
@@ -146,8 +146,11 @@ th, td {
 }
 
 #modalWrapper {
-  display: flex;
-  justify-content: center;
+  position: absolute;
+  /* display: flex;
+  justify-content: center; */
+  top: 20%;
+  left: 40%;
 }
 
 .modal-content h3 {
@@ -160,7 +163,7 @@ th, td {
   margin-bottom: 0.3rem;
 }
 
-.modal-content input {
+.modal-content input,  .modal-content select{
   margin-bottom: 1rem;
 }
 
@@ -173,7 +176,7 @@ th, td {
 }
 
 /* ========= Modal Styling ENDS ========= */
-/* ========= Media Queries Start ========= */
+/* ========= Media Queries START ========= */
 
 /* @media only screen and (max-width: 959px) {
   body {
@@ -211,4 +214,4 @@ th, td {
     mregin-left: 1rem;
     margin-right: 1rem;
   }
-  /* ========= Media Queries Ends ========= */
+  /* ========= Media Queries End ========= */

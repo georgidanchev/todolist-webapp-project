@@ -3,7 +3,6 @@ var htmlWrapper = document.querySelector('body'),
   searchNodeColor = "rgba(214,95,92,0.5)",
   colorChangedNode,
   defultNodeColor,
-  hasSearched = false,
   htmlString,
   controlButtonsVar,
   length;
@@ -15,14 +14,16 @@ function msg(str) {
   console.log(str);
 }
 
-// Run this code only on page load.
+/* */
 window.onload = function() {
   //localStorage.removeItem('arrayData', todoListArray);
   if (localStorage.getItem('arrayData', todoListArray)) {
     tableLoad();
+    msg('Load Table Data');
   } else {
     addExampleData();
     tableSave();
+    msg('Save Table Data');
   }
   tablePrint();
 };
@@ -36,25 +37,27 @@ function tableSave() {
   localStorage.setItem('arrayData', JSON.stringify(todoListArray));
 }
 
+/* */
 function addExampleData() {
   todoListArray = [{
       tName: 'Cook some food',
       dateOfCom: '03/05/18',
-      tPriority: 1
+      tPriority: '1st'
     }, {
       tName: 'Take out the trash',
       dateOfCom: '03/05/18',
-      tPriority: 2
+      tPriority: '2nd'
     },
     {
       tName: 'Go out for a jog',
       dateOfCom: '03/05/18',
-      tPriority: 1
+      tPriority: '1st'
     }
   ];
 }
 
-function tableSave(nameInput, dateInput, prioInput) {
+/* */
+function addToTable(nameInput, dateInput, prioInput) {
   todoListArray.push({
     tName: nameInput,
     dateOfCom: dateInput,
@@ -63,7 +66,7 @@ function tableSave(nameInput, dateInput, prioInput) {
 }
 
 // Control modal visability.
-function ctrlModalVis(vis) {
+function modalVis(vis) {
   var pageCover = document.querySelector('#pageCover'),
     modalBody = document.querySelector('#modalWrapper');
 
@@ -76,6 +79,7 @@ function ctrlModalVis(vis) {
   }
 }
 
+/* */
 function addTableBtns(j) {
   controlButtonsVar = document.querySelectorAll('.controlButtons');
   length = controlButtonsVar.length;
@@ -102,6 +106,7 @@ function addTableBtns(j) {
   }
 }
 
+/* */
 function processTableBtn(j, bName, visibility) {
   if (bName == 'up') {
     let up = document.createElement('button');
@@ -133,26 +138,33 @@ function processTableBtn(j, bName, visibility) {
   }
 }
 
+/* */
 function createTableRow(input) {
   var nameInput = document.querySelector('#taskNameInput'),
     prioInput = document.querySelector('#taskPrioInput'),
     dateInput = document.querySelector('#taskDateInput');
+    var newDate = dateFixer(new Date(dateInput.value));
 
   if (nameInput.value !== 0 && prioInput.value !== 0 && dateInput.value !== 0) {
-
-    tableSave(nameInput.value, dateInput.value, prioInput.value);
+    addToTable(nameInput.value, newDate, prioInput.value);
     tablePrint();
+    tableSave();
+    modalVis(false);
 
     nameInput.value = '';
     prioInput.value = '';
     dateInput.value = '';
-
-    ctrlModalVis(false);
-    tableSave();
   }
 }
 
+function dateFixer(date){
+  var d = date.getDate();
+  var m = date.getMonth() + 1; //Month from 0 to 11
+  var y = date.getFullYear();
+  return (d <= 9 ? '0' + d : d) + '/' + (m<=9 ? '0' + m : m) + '/' +  y;
+}
 
+/* */
 function tableBtnRespond(btnClass, eventTarget) {
   let td = eventTarget.target.parentNode;
   let tr = td.parentNode;
@@ -167,18 +179,22 @@ function tableBtnRespond(btnClass, eventTarget) {
     let nextTr = tr.nextElementSibling;
     tbody.insertBefore(nextTr, tr);
   }
+
+  // FIX SAVEING PROBLEM
+
   addTableBtns();
+  //tableSave();
 }
 
 /* */
 function searchObjArray() {
-  hasSearched = false;
   var tableNames = document.querySelectorAll('.tName');
+
   if (colorChangedNode) {
     colorChangedNode.style.background = defultNodeColor;
   }
 
-  if (searchBox.value !== 0) {
+  if (searchBox.value != 0) {
     var uSearch = searchBox.value.toLowerCase();
     for (var i = 0; i < tableNames.length; i++) {
       if (tableNames[i].textContent.toLowerCase().match(uSearch)) {
@@ -187,7 +203,6 @@ function searchObjArray() {
           defultNodeColor = targetNode.style.background;
           colorChangedNode = targetNode;
           colorChangedNode.style.background = searchNodeColor;
-          hasSearched = true;
         }
       }
     }
@@ -195,12 +210,14 @@ function searchObjArray() {
   searchBox.value = "";
 }
 
-/* */
+/* Search Sub-Function which looks for a specific
+word to avoid getting mutliple search matches. */
 function findWord(word, str) {
   return RegExp('\\b' + word + '\\b').test(str);
 }
 
-/* */
+/* Single click event listener which handles all
+button clicks according to id thought even target. */
 htmlWrapper.addEventListener('click', (event) => {
   if (event.target.tagName == 'BUTTON') {
     var bName = event.target.className;
@@ -209,10 +226,8 @@ htmlWrapper.addEventListener('click', (event) => {
       tableBtnRespond(bName, event);
     }
 
-    if (searchBox.value != 0 || hasSearched == true) {
-      if (event.target.id == "srchBtn") {
-        searchObjArray();
-      }
+    if (event.target.id == "srchBtn") {
+      searchObjArray();
     }
 
     if (event.target.id == "submitButton") {
@@ -220,9 +235,9 @@ htmlWrapper.addEventListener('click', (event) => {
     }
 
     if (event.target.id == "addBtn") {
-      ctrlModalVis(true);
+      modalVis(true);
     } else if (event.target.id == "closeModal") {
-      ctrlModalVis(false);
+      modalVis(false);
     }
   }
 });
@@ -234,6 +249,8 @@ searchBox.addEventListener("keyup", (event) => {
   }
 });
 
+/* Build the table by looping thought the array and
+bulding html from string then convert it to html */
 function tablePrint() {
   htmlString = '';
   htmlString += '<thead><tr><th scope="col">Task Name</th><th scope="col">Priority</th><th scope="col">Completion Date</th><th scope="col">Controls</th></tr></thead><tbody>';
