@@ -1,8 +1,13 @@
+/* ========= Universal Styling START ========= */
+
 *, *:before, *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+/* ========= Universal Styling END ========= */
+/* ========= Core Styling START ========= */
 
 body {
   font-family: sans-serif;
@@ -12,6 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  position: relative;
 }
 
 footer {
@@ -45,12 +51,15 @@ header {
   display: flex;
 }
 
-#srchBtn, #addBtn {
-  cursor: pointer;
-}
+/* ========= Core Styling END ========= */
+/* ========= General Styling START ========= */
 
 #searchBox {
   cursor: text;
+}
+
+#srchBtn, #addBtn {
+  cursor: pointer;
 }
 
 #searchBox, #srchBtn, #addBtn, #closeModal, #submitButton, .modal-content input {
@@ -81,15 +90,22 @@ header {
   background: #508abc;
 }
 
+.centerStuff {
+  display: flex;
+  justify-content: center;
+}
+
+.alignRight {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ========= General Styling END ========= */
+/* ========= Table Styling START ========= */
+
 table {
   width: 95%;
   margin: 0.7rem auto;
-}
-
-caption {
-  font-size: 1.6rem;
-  font-weight: 400;
-  padding: 10px 0;
 }
 
 thead th {
@@ -115,9 +131,8 @@ th, td {
   font-weight: 300;
 }
 
-body {
-  position: relative;
-}
+/* ========= Table Styling END ========= */
+/* ========= Modal Styling STARTS ========= */
 
 #pageCover {
   position: absolute;
@@ -133,16 +148,6 @@ body {
 #modalWrapper {
   display: flex;
   justify-content: center;
-}
-
-.centerStuff {
-  display: flex;
-  justify-content: center;
-}
-
-.alignRight {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .modal-content h3 {
@@ -163,12 +168,14 @@ body {
   background-color: #00c;
   background-color: #f2f2f2;
   border: solid 2px darkgrey;
-  margin: 0, auto;
   padding: 30px;
   z-index: 777;
 }
 
-@media only screen and (max-width: 959px) {
+/* ========= Modal Styling ENDS ========= */
+/* ========= Media Queries Start ========= */
+
+/* @media only screen and (max-width: 959px) {
   body {
     max-width: 95%;
     border: 4px solid red;
@@ -181,9 +188,10 @@ body {
     display: flex;
     flex-direction: column;
   }
-}
+} */
 
-@media only screen and (min-width: 960px) {
+@media only screen and (min-width: 960px) {}
+
   body {
     border: 2px solid blue;
   }
@@ -203,4 +211,4 @@ body {
     mregin-left: 1rem;
     margin-right: 1rem;
   }
-}
+  /* ========= Media Queries Ends ========= */
