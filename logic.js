@@ -96,13 +96,13 @@ function addTableBtns() {
     if (j !== 0) {
       processTableBtn(j, 'up', true);
     } else {
-      processTableBtn(j,'up',false);
+      processTableBtn(j, 'up', false);
     }
 
     if (j !== length - 1) {
       processTableBtn(j, 'down', true);
     } else {
-      processTableBtn(j,'down',false);
+      processTableBtn(j, 'down', false);
     }
     processTableBtn(j, 'remove', true);
   }
@@ -144,7 +144,7 @@ function createTableRow(input) {
   var nameInput = document.querySelector('#taskNameInput'),
     prioInput = document.querySelector('#taskPrioInput'),
     dateInput = document.querySelector('#taskDateInput');
-    var newDate = dateFixer(new Date(dateInput.value));
+  var newDate = dateFixer(new Date(dateInput.value));
 
   if (nameInput.value !== 0 && prioInput.value !== 0 && dateInput.value !== 0) {
     addToTable(nameInput.value, newDate, prioInput.value);
@@ -159,11 +159,11 @@ function createTableRow(input) {
 }
 
 /* Fixes default date format for date input modal field. */
-function dateFixer(date){
+function dateFixer(date) {
   var d = date.getDate();
   var m = date.getMonth() + 1; //Month from 0 to 11
   var y = date.getFullYear();
-  return (d <= 9 ? '0' + d : d) + '/' + (m<=9 ? '0' + m : m) + '/' +  y;
+  return (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
 }
 
 /* This responds to table control button events. */
@@ -174,14 +174,14 @@ function tableBtnRespond(btnClass, eventTarget) {
 
   if (btnClass == 'remove') {
     tbody.removeChild(tr);
-    todoListArray.splice(tr.rowIndex,1);
+    todoListArray.splice(tr.rowIndex, 1);
   } else if (btnClass == 'up') {
     let prevTr = tr.previousElementSibling;
     tbody.insertBefore(tr, prevTr);
-    arraymove(todoListArray, tr.rowIndex, tr.rowIndex-1);
+    arraymove(todoListArray, tr.rowIndex, tr.rowIndex - 1);
   } else if (btnClass == 'down') {
     let nextTr = tr.nextElementSibling;
-    arraymove(todoListArray, tr.rowIndex-1, tr.rowIndex);
+    arraymove(todoListArray, tr.rowIndex - 1, tr.rowIndex);
     tbody.insertBefore(nextTr, tr);
   }
 
@@ -191,9 +191,9 @@ function tableBtnRespond(btnClass, eventTarget) {
 
 /* Sub-function which help mirror table rows and the array. */
 function arraymove(arr, fromIndex, toIndex) {
-    var element = arr[fromIndex];
-    arr.splice(fromIndex, 1);
-    arr.splice(toIndex, 0, element);
+  var element = arr[fromIndex];
+  arr.splice(fromIndex, 1);
+  arr.splice(toIndex, 0, element);
 }
 
 
@@ -238,27 +238,32 @@ htmlWrapper.addEventListener('click', (event) => {
     if (event.target.parentNode.className == "controlButtons") {
       tableBtnRespond(bName, event);
     }
-
     if (event.target.id == "srchBtn") {
       searchObjArray();
     }
-
     if (event.target.id == "submitButton") {
       createTableRow();
     }
-
     if (event.target.id == "addBtn") {
       modalVis(true);
-    } else if (event.target.id == "closeModal") {
+    }
+    if (event.target.id == "closeModal") {
       modalVis(false);
     }
   }
 });
 
 /* Event listener for the enter key. */
-searchBox.addEventListener("keyup", (event) => {
+htmlWrapper.addEventListener("keyup", (event) => {
+if(event.target.tagName == 'INPUT') {
   if (event.keyCode == 13) {
     searchObjArray();
+    msg(event.target.tagName);
+  }
+}
+  if (event.keyCode == 27) {
+   modalVis(false);
+   msg(event.target.tagName);
   }
 });
 

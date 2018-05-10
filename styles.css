@@ -84,9 +84,8 @@ header {
   background: #768da3;
 }
 
-.up {
+.up, #submitButton {
   background: #52bab3;
-  background-size: cover;
 }
 
 .down {
@@ -151,11 +150,8 @@ th, td {
 }
 
 #modalWrapper {
-  position: absolute;
-  /* display: flex;
-  justify-content: center; */
-  top: 20%;
-  left: 40%;
+  justify-content: center;
+  margin-top: 15%;
 }
 
 .modal-content h3 {
@@ -181,6 +177,7 @@ th, td {
 }
 
 /* ========= Modal Styling ENDS ========= */
+
 /* ========= Media Queries START ========= */
 
 @media only screen and (max-width: 480px) {
@@ -194,28 +191,23 @@ th, td {
   header div {
     display: flex;
     flex-direction: column;
-
   }
   header p {
     padding-bottom: 3%;
   }
-
   header div, header input, header button {
-    margin:  2%  5%;
+    margin: 2% 5%;
   }
   header button, header input {
     padding: 3%;
   }
-
   .controlButtons button {
     height: 25px;
     width: 25px;
   }
-
   #contentWrapper {
     padding: 0 5px;
   }
-
 }
 
 @media only screen and (min-width: 768px) {

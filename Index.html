@@ -22,8 +22,6 @@
     </div>
   </header>
 
-
-
   <div id="contentWrapper">
     <main>
       <table>
@@ -32,41 +30,39 @@
       </table>
     </main>
 
-
     <div id="pageCover" style="display: none">
-    </div>
-    <div id="modalWrapper" style="display: none">
 
-      <div id="myModal">
+      <div id="modalWrapper" style="display: none">
 
-        <div class="alignRight">
-          <!-- <button id="resetArrayData">Reset</button> -->
-          <button id="closeModal">x</button>
-        </div>
+        <div id="myModal">
 
-        <div class="centerStuff">
-          <h3>Task Details Form</h3>
-        </div>
+          <div class="alignRight">
+            <!-- <button id="resetArrayData">Reset</button> -->
+            <button id="closeModal">x</button>
+          </div>
 
-        <div class="modal-content">
-          <p>Review Task Name:</p>
-          <input type="text" id="taskNameInput" placeholder="" />
-          <p>Task Prioiry: </p>
-          <select id="taskPrioInput">
+          <div class="centerStuff">
+            <h3>Task Details Form</h3>
+          </div>
+
+          <div class="modal-content">
+            <p>Review Task Name:</p>
+            <input type="text" id="taskNameInput" placeholder="" />
+            <p>Task Prioiry: </p>
+            <select id="taskPrioInput">
             <option value="1st">1st</option>
             <option value="2nd">2nd</option>
             <option value="3rd">3rd</option>
             <option value="4th">4th</option>
           </select>
-          <p>Date of Completion:</p>
-          <input type="date" id="taskDateInput">
+            <p>Date of Completion:</p>
+            <input type="date" id="taskDateInput">
+          </div>
+
+          <div class="centerStuff">
+            <button type="button" id="submitButton">Submit</button>
+          </div>
         </div>
-
-        <div class="centerStuff">
-          <button type="button" id="submitButton">Submit</button>
-
-        </div>
-
       </div>
     </div>
 
@@ -76,6 +72,7 @@
     <p><small>&copy;2018 ToDoEr, The Life Organzer</small></p>
   </footer>
 </body>
+
 <script src="logic.js"></script>
 
 </html>
