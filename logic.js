@@ -1,6 +1,6 @@
 var htmlWrapper = document.querySelector('body'),
   searchBox = document.querySelector('#searchBox'),
-  searchResultColor = "rgba(214,95,92,0.5)",
+  searchNodeColor = "rgba(214,95,92,0.5)",
   colorChangedNode,
   defultNodeColor,
   hasSearched = false,
@@ -8,30 +8,55 @@ var htmlWrapper = document.querySelector('body'),
   controlButtonsVar,
   length;
 
-var todoListArray = [{
-    tName: 'Cook some food',
-    dateOfCom: '03/05/18',
-    tPriority: 1
-  }, {
-    tName: 'Take out the trash',
-    dateOfCom: '03/05/18',
-    tPriority: 2
-  },
-  {
-    tName: 'Go out for a jog',
-    dateOfCom: '03/05/18',
-    tPriority: 1
-  },
-  {
-    tName: 'Clean the house',
-    dateOfCom: '03/05/18',
-    tPriority: 2
-  }
-];
+var todoListArray = [];
 
 // Debuing only function.
 function msg(str) {
   console.log(str);
+}
+
+// Run this code only when script first loads.
+window.onload = function() {
+  //localStorage.removeItem('arrayData', todoListArray);
+  if (localStorage.getItem('arrayData', todoListArray)) {
+    tableLoad();
+  } else {
+    addExampleData();
+    tableSave();
+  }
+  tablePrint();
+};
+
+function tableLoad() {
+  var string = localStorage.getItem('arrayData', string);
+  todoListArray = JSON.parse(string);
+}
+
+function tableSave() {
+  localStorage.setItem('arrayData', JSON.stringify(todoListArray));
+}
+
+function addExampleData() {
+  todoListArray = [{
+      tName: 'Cook some food',
+      dateOfCom: '03/05/18',
+      tPriority: 1
+    }, {
+      tName: 'Take out the trash',
+      dateOfCom: '03/05/18',
+      tPriority: 2
+    },
+    {
+      tName: 'Go out for a jog',
+      dateOfCom: '03/05/18',
+      tPriority: 1
+    },
+    {
+      tName: 'Clean the house',
+      dateOfCom: '03/05/18',
+      tPriority: 2
+    }
+  ];
 }
 
 // Control modal visability.
@@ -47,11 +72,6 @@ function ctrlModalVis(vis) {
     modalBody.style.display = "none";
   }
 }
-
-// Run this code only when script first loads.
-window.onload = function() {
-  tablePrint();
-};
 
 function addTableBtns(j) {
   controlButtonsVar = document.querySelectorAll('.controlButtons');
@@ -83,7 +103,7 @@ function processTableBtn(j, bName, visibility) {
   if (bName == 'up') {
     let up = document.createElement('button');
     if (visibility == true) {
-      up.textContent = 'u';
+      up.textContent = 'up';
       up.className = 'up';
     } else {
       up.className = 'lockedBtn';
@@ -93,7 +113,7 @@ function processTableBtn(j, bName, visibility) {
   } else if (bName == 'down') {
     let down = document.createElement('button');
     if (visibility == true) {
-      down.textContent = "d";
+      down.textContent = "dw";
       down.className = 'down';
     } else {
       down.className = 'lockedBtn';
@@ -133,6 +153,8 @@ function createTableRow(input) {
     td1Pri.textContent = prioInput.value;
     td2Dat.textContent = dateInput.value;
 
+    todoListArray.push({tName : nameInput.value, dateOfCom: dateInput.value, tPriority: prioInput.value});
+
     nameInput.value = '';
     prioInput.value = '';
     dateInput.value = '';
@@ -140,6 +162,7 @@ function createTableRow(input) {
     document.querySelectorAll('tbody')[0].appendChild(tr);
     ctrlModalVis(false);
     addTableBtns();
+    tableSave();
   }
 }
 
@@ -162,14 +185,13 @@ function tableBtnRespond(btnClass, eventTarget) {
 
 /* */
 function searchObjArray() {
+  hasSearched = false;
   var tableNames = document.querySelectorAll('.tName');
-
-  if (hasSearched == true) {
+  if (colorChangedNode) {
     colorChangedNode.style.background = defultNodeColor;
-    hasSearched = false;
   }
 
-  if (searchBox.value != 0 && hasSearched == false) {
+  if (searchBox.value !== 0) {
     var uSearch = searchBox.value.toLowerCase();
     for (var i = 0; i < tableNames.length; i++) {
       if (tableNames[i].textContent.toLowerCase().match(uSearch)) {
@@ -177,7 +199,7 @@ function searchObjArray() {
           var targetNode = tableNames[i].parentNode;
           defultNodeColor = targetNode.style.background;
           colorChangedNode = targetNode;
-          colorChangedNode.style.background = searchResultColor;
+          colorChangedNode.style.background = searchNodeColor;
           hasSearched = true;
         }
       }
@@ -200,8 +222,10 @@ htmlWrapper.addEventListener('click', (event) => {
       tableBtnRespond(bName, event);
     }
 
-    if (event.target.id == "srchBtn") {
-      searchObjArray();
+    if (searchBox.value != 0 || hasSearched == true) {
+      if (event.target.id == "srchBtn") {
+        searchObjArray();
+      }
     }
 
     if (event.target.id == "submitButton") {
@@ -215,6 +239,7 @@ htmlWrapper.addEventListener('click', (event) => {
     }
   }
 });
+
 /* */
 searchBox.addEventListener("keyup", (event) => {
   if (event.keyCode == 13) {
