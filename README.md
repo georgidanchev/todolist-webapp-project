@@ -8,4 +8,4 @@ I am very proud of this project, as this was my first proper custom web project 
 
 Behind the scene a lot of cool stuff can happen like: moving tasks up, down, deleting, adding tasks and even making simple search queries and matching words. There is quite a bit more in the code. If you are interested, take a look in the source code, it's really interesting.
 
-Click <a href="https://f54vnfg.github.io/Todo-List-Website/"><strong>Todo-List-Website</strong></a> to view the web page.
+Click <a href="https://f54vnfg.github.io/TodoList-Website-Project/"><strong>Todo-List-Website</strong></a> to view the web page.
