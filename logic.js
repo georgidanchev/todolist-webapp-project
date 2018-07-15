@@ -1,5 +1,5 @@
-var htmlWrapper = document.querySelector('body'),
-  searchBox = document.querySelector('#searchBox'),
+var htmlWrapper = document.querySelector("body"),
+  searchBox = document.querySelector("#searchBox"),
   searchNodeColor = "rgba(214,95,92,0.5)",
   colorChangedNode,
   defultNodeColor,
@@ -14,48 +14,48 @@ function msg(str) {
   console.log(str);
 }
 
+/* This is used if no data is present in the array. */
+function addExampleData() {
+  todoListArray = [{
+      tName: "Cook some food",
+      dateOfCom: "03/05/18",
+      tPriority: "1st"
+    }, {
+      tName: "Take out the trash",
+      dateOfCom: "03/05/18",
+      tPriority: "2nd"
+    },
+    {
+      tName: "Go out for a jog",
+      dateOfCom: "03/05/18",
+      tPriority: "1st"
+    }
+  ];
+}
+
 /* When the page loads. do. this. */
 window.onload = function() {
 
-  if (localStorage.getItem('arrayData', todoListArray)) {
+  if (localStorage.getItem("arrayData", todoListArray)) {
     tableLoad();
-    // msg('Load Table Data');
+    // msg("Load Table Data");
   } else {
     addExampleData();
     tableSave();
-    // msg('Save Table Data');
+    // msg("Save Table Data");
   }
   tablePrint();
 };
 
 /* Retrieve array data and convert back from string format. */
 function tableLoad() {
-  var string = localStorage.getItem('arrayData', string);
+  var string = localStorage.getItem("arrayData", string);
   todoListArray = JSON.parse(string);
 }
 
 /* Save array data locally, but in a string format. */
 function tableSave() {
-  localStorage.setItem('arrayData', JSON.stringify(todoListArray));
-}
-
-/* This is used if no data is present in the array. */
-function addExampleData() {
-  todoListArray = [{
-      tName: 'Cook some food',
-      dateOfCom: '03/05/18',
-      tPriority: '1st'
-    }, {
-      tName: 'Take out the trash',
-      dateOfCom: '03/05/18',
-      tPriority: '2nd'
-    },
-    {
-      tName: 'Go out for a jog',
-      dateOfCom: '03/05/18',
-      tPriority: '1st'
-    }
-  ];
+  localStorage.setItem("arrayData", JSON.stringify(todoListArray));
 }
 
 /* This function adds stuff to the table array. */
@@ -69,8 +69,8 @@ function addToTable(nameInput, dateInput, prioInput) {
 
 /* This controls the modal visibility. */
 function modalVis(vis) {
-  var pageCover = document.querySelector('#pageCover'),
-    modalBody = document.querySelector('#modalWrapper');
+  var pageCover = document.querySelector("#pageCover"),
+    modalBody = document.querySelector("#modalWrapper");
 
   if (vis == true) {
     pageCover.style.display = "block";
@@ -83,9 +83,8 @@ function modalVis(vis) {
 
 /* This function resets and adds all table buttons. */
 function addTableBtns() {
-  controlButtonsVar = document.querySelectorAll('.controlButtons');
+  controlButtonsVar = document.querySelectorAll(".controlButtons");
   length = controlButtonsVar.length;
-  let up = document.createElement('button');
 
   // A loop which empties all the html control button fields.
   for (let x = 0; x < length; x++) {
@@ -94,56 +93,56 @@ function addTableBtns() {
 
   for (let j = 0; j < length; j++) {
     if (j !== 0) {
-      processTableBtn(j, 'up', true);
+      processTableBtn(j, "up", true);
     } else {
-      processTableBtn(j, 'up', false);
+      processTableBtn(j, "up", false);
     }
 
     if (j !== length - 1) {
-      processTableBtn(j, 'down', true);
+      processTableBtn(j, "down", true);
     } else {
-      processTableBtn(j, 'down', false);
+      processTableBtn(j, "down", false);
     }
-    processTableBtn(j, 'remove', true);
+    processTableBtn(j, "remove", true);
   }
 }
 
 /* This responds to add button function  to create table buttons. */
 function processTableBtn(j, bName, visibility) {
-  if (bName == 'up') {
-    let up = document.createElement('button');
-    up.textContent = 'u';
+  if (bName == "up") {
+    let up = document.createElement("button");
+    up.textContent = "u";
     if (visibility == true) {
-      up.className = 'up';
+      up.className = "up";
     } else {
-      up.className = 'lockedBtn';
-      up.style.visibility = 'hidden';
+      up.className = "lockedBtn";
+      up.style.visibility = "hidden";
     }
     controlButtonsVar[j].appendChild(up);
-  } else if (bName == 'down') {
-    let down = document.createElement('button');
+  } else if (bName == "down") {
+    let down = document.createElement("button");
     down.textContent = "d";
     if (visibility == true) {
-      down.className = 'down';
+      down.className = "down";
     } else {
-      down.className = 'lockedBtn';
-      down.style.visibility = 'hidden';
+      down.className = "lockedBtn";
+      down.style.visibility = "hidden";
     }
     controlButtonsVar[j].appendChild(down);
-  } else if (bName == 'remove') {
-    let remove = document.createElement('button');
-    remove.textContent = 'x';
+  } else if (bName == "remove") {
+    let remove = document.createElement("button");
+    remove.textContent = "x";
     if (visibility == true) {
-      remove.className = 'remove';
+      remove.className = "remove";
     }
     controlButtonsVar[j].appendChild(remove);
   }
 }
 
 function createTableRow(input) {
-  var nameInput = document.querySelector('#taskNameInput'),
-    prioInput = document.querySelector('#taskPrioInput'),
-    dateInput = document.querySelector('#taskDateInput');
+  var nameInput = document.querySelector("#taskNameInput"),
+    prioInput = document.querySelector("#taskPrioInput"),
+    dateInput = document.querySelector("#taskDateInput");
   var newDate = dateFixer(new Date(dateInput.value));
 
   if (nameInput.value !== 0 && prioInput.value !== 0 && dateInput.value !== 0) {
@@ -152,9 +151,9 @@ function createTableRow(input) {
     tableSave();
     modalVis(false);
 
-    nameInput.value = '';
-    prioInput.value = '';
-    dateInput.value = '';
+    nameInput.value = "";
+    prioInput.value = "";
+    dateInput.value = "";
   }
 }
 
@@ -163,7 +162,7 @@ function dateFixer(date) {
   var d = date.getDate();
   var m = date.getMonth() + 1; //Month from 0 to 11
   var y = date.getFullYear();
-  return (d <= 9 ? '0' + d : d) + '/' + (m <= 9 ? '0' + m : m) + '/' + y;
+  return (d <= 9 ? "0" + d : d) + "/" + (m <= 9 ? "0" + m : m) + "/" + y;
 }
 
 /* This responds to table control button events. */
@@ -172,14 +171,14 @@ function tableBtnRespond(btnClass, eventTarget) {
   let tr = td.parentNode;
   let tbody = tr.parentNode;
 
-  if (btnClass == 'remove') {
+  if (btnClass == "remove") {
     tbody.removeChild(tr);
     todoListArray.splice(tr.rowIndex, 1);
-  } else if (btnClass == 'up') {
+  } else if (btnClass == "up") {
     let prevTr = tr.previousElementSibling;
     tbody.insertBefore(tr, prevTr);
     arraymove(todoListArray, tr.rowIndex, tr.rowIndex - 1);
-  } else if (btnClass == 'down') {
+  } else if (btnClass == "down") {
     let nextTr = tr.nextElementSibling;
     arraymove(todoListArray, tr.rowIndex - 1, tr.rowIndex);
     tbody.insertBefore(nextTr, tr);
@@ -201,7 +200,7 @@ function arraymove(arr, fromIndex, toIndex) {
 and looks for matches then passes sub-function to narrow
 down the search. If match is found changes node color. */
 function searchObjArray() {
-  var tableNames = document.querySelectorAll('.tName');
+  var tableNames = document.querySelectorAll(".tName");
 
   if (colorChangedNode) {
     colorChangedNode.style.background = defultNodeColor;
@@ -226,13 +225,13 @@ function searchObjArray() {
 /* Search Sub-Function which looks for a specific
 word to avoid getting multiple search matches. */
 function findWord(word, str) {
-  return RegExp('\\b' + word + '\\b').test(str);
+  return RegExp("\\b" + word + "\\b").test(str);
 }
 
 /* Single click event listener which handles all
 button clicks according to id thought even target. */
-htmlWrapper.addEventListener('click', (event) => {
-  if (event.target.tagName == 'BUTTON') {
+htmlWrapper.addEventListener("click", (event) => {
+  if (event.target.tagName == "BUTTON") {
     var bName = event.target.className;
 
     if (event.target.parentNode.className == "controlButtons") {
@@ -255,7 +254,7 @@ htmlWrapper.addEventListener('click', (event) => {
 
 /* Event listener for the enter key. */
 htmlWrapper.addEventListener("keyup", (event) => {
-if(event.target.tagName == 'INPUT') {
+if(event.target.tagName == "INPUT") {
   if (event.keyCode == 13) {
     searchObjArray();
     msg(event.target.tagName);
@@ -281,7 +280,7 @@ function tablePrint() {
       '</td><td class = "controlButtons"></td></tr>';
   }
 
-  htmlString += '</tbody>';
-  document.querySelector('#todoHTML').innerHTML = htmlString;
+  htmlString += "</tbody>";
+  document.querySelector("#todoHTML").innerHTML = htmlString;
   addTableBtns();
 }

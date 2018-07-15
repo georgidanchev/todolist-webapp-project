@@ -1,6 +1,6 @@
 # Todo-List-Website
 
-This is a really cool project I built after completing the **TeamTreeHouse** front-end development track. The idea for this small web projected was inspired by the <a href="https://todoist.com">todoist.com</a> website
+This is a really cool project I built after completing the **TeamTreeHouse** front-end development track. The idea for this small web projected was inspired by the <a href="https://todoist.com">todoist.com</a> website.
 
 The website is built using **HTML5, CSS, and JavaScript**. JavaScript is heavily utilized for a lot of different functions to manipulate each task.
 
