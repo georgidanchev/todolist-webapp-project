@@ -139,7 +139,7 @@ function addTableBtns() {
   }
 }
 
-function createTableRow(input) {
+function createTableRow() {
   var nameInput = document.querySelector("#taskNameInput"),
     prioInput = document.querySelector("#taskPrioInput"),
     dateInput = document.querySelector("#taskDateInput");
