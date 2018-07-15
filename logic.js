@@ -72,38 +72,12 @@ function modalVis(vis) {
   var pageCover = document.querySelector("#pageCover"),
     modalBody = document.querySelector("#modalWrapper");
 
-  if (vis == true) {
+  if (vis === true) {
     pageCover.style.display = "block";
     modalBody.style.display = "flex";
   } else {
     pageCover.style.display = "none";
     modalBody.style.display = "none";
-  }
-}
-
-/* This function resets and adds all table buttons. */
-function addTableBtns() {
-  controlButtonsVar = document.querySelectorAll(".controlButtons");
-  length = controlButtonsVar.length;
-
-  // A loop which empties all the html control button fields.
-  for (let x = 0; x < length; x++) {
-    controlButtonsVar[x].innerHTML = "";
-  }
-
-  for (let j = 0; j < length; j++) {
-    if (j !== 0) {
-      processTableBtn(j, "up", true);
-    } else {
-      processTableBtn(j, "up", false);
-    }
-
-    if (j !== length - 1) {
-      processTableBtn(j, "down", true);
-    } else {
-      processTableBtn(j, "down", false);
-    }
-    processTableBtn(j, "remove", true);
   }
 }
 
@@ -136,6 +110,32 @@ function processTableBtn(j, bName, visibility) {
       remove.className = "remove";
     }
     controlButtonsVar[j].appendChild(remove);
+  }
+}
+
+/* This function resets and adds all table buttons. */
+function addTableBtns() {
+  controlButtonsVar = document.querySelectorAll(".controlButtons");
+  length = controlButtonsVar.length;
+
+  // A loop which empties all the html control button fields.
+  for (let x = 0; x < length; x++) {
+    controlButtonsVar[x].innerHTML = "";
+  }
+
+  for (let j = 0; j < length; j++) {
+    if (j !== 0) {
+      processTableBtn(j, "up", true);
+    } else {
+      processTableBtn(j, "up", false);
+    }
+
+    if (j !== length - 1) {
+      processTableBtn(j, "down", true);
+    } else {
+      processTableBtn(j, "down", false);
+    }
+    processTableBtn(j, "remove", true);
   }
 }
 
