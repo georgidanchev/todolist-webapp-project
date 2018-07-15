@@ -116,7 +116,7 @@ table {
 }
 
 thead th {
-  font-weight: 400;
+  /* font-weight: 400; */
   background: darkgrey;
   color: #FFF;
   padding: 0.5rem;
@@ -231,7 +231,7 @@ th, td {
   }
   header button {
     padding: 1.3rem;
-    mregin-left: 1rem;
+    /* margin-left: 1rem; */
     margin-right: 1rem;
   }
 }
