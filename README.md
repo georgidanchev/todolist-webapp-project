@@ -1,4 +1,4 @@
-#Todo-List-Website
+# Todo-List-Website
 
 This is a really cool project I built after completing the **TeamTreeHouse** front-end development track. The idea for this small web projected was inspired by the <a href="https://todoist.com">todoist.com</a> website
 
